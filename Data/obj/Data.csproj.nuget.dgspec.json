@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Uklon\\uklon-backend\\uklon-backend\\uklon-backend.csproj": {}
+    "D:\\Uklon\\uklon-backend\\Data\\Data.csproj": {}
   },
   "projects": {
-    "D:\\Uklon\\uklon-backend\\uklon-backend\\uklon-backend.csproj": {
+    "D:\\Uklon\\uklon-backend\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Uklon\\uklon-backend\\uklon-backend\\uklon-backend.csproj",
-        "projectName": "uklon-backend",
-        "projectPath": "D:\\Uklon\\uklon-backend\\uklon-backend\\uklon-backend.csproj",
+        "projectUniqueName": "D:\\Uklon\\uklon-backend\\Data\\Data.csproj",
+        "projectName": "Data",
+        "projectPath": "D:\\Uklon\\uklon-backend\\Data\\Data.csproj",
         "packagesPath": "C:\\Users\\HP elitebook G6 745\\.nuget\\packages\\",
-        "outputPath": "D:\\Uklon\\uklon-backend\\uklon-backend\\obj\\",
+        "outputPath": "D:\\Uklon\\uklon-backend\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HP elitebook G6 745\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -22,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -40,12 +39,6 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "dependencies": {
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.2.3, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -58,9 +51,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

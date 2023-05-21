@@ -229,11 +229,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HP elitebook G6 745\\Documents\\Uklon\\uklon-backend\\uklon-backend\\uklon-backend.csproj",
+      "projectUniqueName": "D:\\Uklon\\uklon-backend\\uklon-backend\\uklon-backend.csproj",
       "projectName": "uklon-backend",
-      "projectPath": "C:\\Users\\HP elitebook G6 745\\Documents\\Uklon\\uklon-backend\\uklon-backend\\uklon-backend.csproj",
+      "projectPath": "D:\\Uklon\\uklon-backend\\uklon-backend\\uklon-backend.csproj",
       "packagesPath": "C:\\Users\\HP elitebook G6 745\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HP elitebook G6 745\\Documents\\Uklon\\uklon-backend\\uklon-backend\\obj\\",
+      "outputPath": "D:\\Uklon\\uklon-backend\\uklon-backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\HP elitebook G6 745\\AppData\\Roaming\\NuGet\\NuGet.Config",

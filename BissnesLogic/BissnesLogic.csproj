@@ -8,11 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\" />
-    <Folder Include="Interface\" />
-    <Folder Include="Exeptions\" />
+    <Compile Remove="DTO\**" />
+    <Compile Remove="Exeptions\**" />
+    <Compile Remove="Interface\**" />
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="DTO\**" />
+    <EmbeddedResource Remove="Exeptions\**" />
+    <EmbeddedResource Remove="Interface\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="DTO\**" />
+    <None Remove="Exeptions\**" />
+    <None Remove="Interface\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Helpers\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

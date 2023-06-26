@@ -33,10 +33,12 @@ namespace Data
 
             modelBuilder.Entity<User>().HasOne(p => p.Role)
                                         .WithMany(c => c.Users)
-                                        .HasForeignKey(p => p.RoleId);
+                                        .HasForeignKey(p => p.RoleId)
+                                        .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<Transport>().HasOne(p => p.Type)
                                         .WithMany(c => c.Transports)
-                                        .HasForeignKey(p => p.TypeId);
+                                        .HasForeignKey(p => p.TypeId)
+                                        .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.SeedTransports();
             modelBuilder.SeedRoles();

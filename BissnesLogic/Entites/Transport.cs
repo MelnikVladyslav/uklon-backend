@@ -21,7 +21,7 @@ namespace BissnesLogic.Entites
         [Range(0, 100_000)]
         public decimal Price { get; set; }
 
-        [StringLength(1000, MinimumLength = 10)]
+        [StringLength(255, MinimumLength = 10)]
         public string? Description { get; set; }
 
         [Url]

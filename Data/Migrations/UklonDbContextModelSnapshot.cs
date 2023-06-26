@@ -58,8 +58,8 @@ namespace Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Description")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("ImagePath")
                         .IsRequired()
@@ -352,25 +352,25 @@ namespace Data.Migrations
                         new
                         {
                             Id = "Full",
-                            ConcurrencyStamp = "700bfe83-03be-4b05-b82e-74fe0da8b2b1",
+                            ConcurrencyStamp = "9986f947-1bc2-4287-8254-5b26edc82938",
                             Name = "Administrator"
                         },
                         new
                         {
                             Id = "Client",
-                            ConcurrencyStamp = "e1a17dd4-59c3-40d1-be41-3a401faef565",
+                            ConcurrencyStamp = "06f1b9a2-6aaf-49d0-8e47-79198130a076",
                             Name = "Client"
                         },
                         new
                         {
                             Id = "Partner",
-                            ConcurrencyStamp = "ec1439a6-5653-4f1d-b665-dd30accb85d0",
+                            ConcurrencyStamp = "999acb8e-722d-4435-9125-d528747fd2cc",
                             Name = "Bisness-partner"
                         },
                         new
                         {
                             Id = "Driver",
-                            ConcurrencyStamp = "0ba0323b-548c-4005-8a6f-bd7dc189c503",
+                            ConcurrencyStamp = "1d895b34-dd5b-4391-a6e3-4981215cd64f",
                             Name = "Driver"
                         });
                 });
@@ -414,7 +414,7 @@ namespace Data.Migrations
                     b.HasOne("BissnesLogic.Entites.Types", "Type")
                         .WithMany("Transports")
                         .HasForeignKey("TypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Type");
@@ -476,7 +476,7 @@ namespace Data.Migrations
                     b.HasOne("BissnesLogic.Entites.Roles", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Role");

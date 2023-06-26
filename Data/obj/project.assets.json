@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\HP elitebook G6 745\\.nuget\\packages\\": {}
+    "C:\\Users\\user\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Uklon\\uklon-backend\\Data\\Data.csproj",
+      "projectUniqueName": "F:\\Projs\\uklon-backend\\uklon-backend\\Data\\Data.csproj",
       "projectName": "Data",
-      "projectPath": "D:\\Uklon\\uklon-backend\\Data\\Data.csproj",
-      "packagesPath": "C:\\Users\\HP elitebook G6 745\\.nuget\\packages\\",
-      "outputPath": "D:\\Uklon\\uklon-backend\\Data\\obj\\",
+      "projectPath": "F:\\Projs\\uklon-backend\\uklon-backend\\Data\\Data.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "F:\\Projs\\uklon-backend\\uklon-backend\\Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\HP elitebook G6 745\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }

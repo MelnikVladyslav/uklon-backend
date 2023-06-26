@@ -90,7 +90,7 @@ namespace Data.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,7 +208,7 @@ namespace Data.Migrations
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TypeId = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OrderId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -225,7 +225,7 @@ namespace Data.Migrations
                         column: x => x.TypeId,
                         principalTable: "Types",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -233,10 +233,10 @@ namespace Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "Client", "e1a17dd4-59c3-40d1-be41-3a401faef565", "Roles", "Client", null },
-                    { "Driver", "0ba0323b-548c-4005-8a6f-bd7dc189c503", "Roles", "Driver", null },
-                    { "Full", "700bfe83-03be-4b05-b82e-74fe0da8b2b1", "Roles", "Administrator", null },
-                    { "Partner", "ec1439a6-5653-4f1d-b665-dd30accb85d0", "Roles", "Bisness-partner", null }
+                    { "Client", "06f1b9a2-6aaf-49d0-8e47-79198130a076", "Roles", "Client", null },
+                    { "Driver", "1d895b34-dd5b-4391-a6e3-4981215cd64f", "Roles", "Driver", null },
+                    { "Full", "9986f947-1bc2-4287-8254-5b26edc82938", "Roles", "Administrator", null },
+                    { "Partner", "999acb8e-722d-4435-9125-d528747fd2cc", "Roles", "Bisness-partner", null }
                 });
 
             migrationBuilder.InsertData(

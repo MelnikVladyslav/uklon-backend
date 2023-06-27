@@ -48,9 +48,9 @@
               "target": "Package",
               "version": "[6.0.19, )"
             },
-            "Vonage": {
+            "Twilio": {
               "target": "Package",
-              "version": "[6.6.0, )"
+              "version": "[6.8.0, )"
             }
           },
           "imports": [
@@ -136,6 +136,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.19, )"
+            },
+            "Twilio": {
+              "target": "Package",
+              "version": "[6.8.0, )"
             }
           },
           "imports": [
@@ -183,9 +187,6 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Uklon\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj": {
-                "projectPath": "D:\\Uklon\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj"
-              },
               "D:\\Uklon\\uklon-backend\\Data\\Data.csproj": {
                 "projectPath": "D:\\Uklon\\uklon-backend\\Data\\Data.csproj"
               }
@@ -210,9 +211,9 @@
               "target": "Package",
               "version": "[6.2.3, )"
             },
-            "Vonage": {
+            "Twilio": {
               "target": "Package",
-              "version": "[6.6.0, )"
+              "version": "[6.8.0, )"
             }
           },
           "imports": [

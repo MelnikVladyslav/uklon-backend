@@ -10,11 +10,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.19" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-    <PackageReference Include="Vonage" Version="6.6.0" />
+    <PackageReference Include="Twilio" Version="6.8.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BissnesLogic\BissnesLogic.csproj" />
     <ProjectReference Include="..\Data\Data.csproj" />
   </ItemGroup>
 

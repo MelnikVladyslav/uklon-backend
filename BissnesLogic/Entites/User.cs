@@ -18,6 +18,7 @@ namespace BissnesLogic.Entites
 
         public string RoleId { get; set; }
         public Roles? Role { get; set; }
+        public string Token { get; set; }
         public ICollection<Order> Orders { get; set; } = new HashSet<Order>();
     }
 }

@@ -6,10 +6,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Mail;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
-using Vonage;
-using Vonage.Request;
+using Data;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
 
 namespace uklon_backend.Controllers
 {
@@ -17,66 +20,66 @@ namespace uklon_backend.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-        Random random = new Random();   
+        private readonly IConfiguration _configuration; 
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
+        private readonly UklonDbContext _context;
+        Random random = new Random();
+        int code = 0;
 
-        public LoginController(IConfiguration configuration)
+        public LoginController(IConfiguration configuration, 
+                              UserManager<User> userManager,
+                              SignInManager<User> signInManager,
+                              UklonDbContext context)
         {
+            this.userManager = userManager;
+            this.signInManager = signInManager;
             _configuration = configuration;
+            _context = context;
+            code = random.Next(1000, 9999);
         }
 
         [HttpPost("login-phone")]
-        public IActionResult LoginPhone(PhoneNumberVerificationDto phoneNumberDto)
+        public async Task<IActionResult> LoginPhoneAsync(PhoneNumberVerificationDto phoneNumberDto)
         {
             // Отримати номер телефона користувача з phoneNumberDto
             string phoneNumber = phoneNumberDto.PhoneNumber;
 
-            // Здійснити перевірку номера телефона шляхом відправки повідомлення
-            bool isPhoneValid = SendVerificationMessage(phoneNumber);
+            var user = await userManager.FindByNameAsync(phoneNumber);
+            bool isPassword = await userManager.CheckPasswordAsync(user, phoneNumberDto.Password);
 
-            if (!isPhoneValid)
+            if (user == null)
             {
-                return BadRequest("Невірний номер телефона");
+                user = new User()
+                { 
+                    UserName = phoneNumber,
+                    PhoneNumber = phoneNumber,
+                    RoleId = "Client",
+                    PasswordHash = phoneNumberDto.Password
+                };
+
+                await userManager.CreateAsync(user, phoneNumberDto.Password);
+            }
+            if (user != null && !isPassword)
+            {
+                return BadRequest();
             }
 
             // Генерація JWT-токена
-            var token = GenerateJwtToken(phoneNumber);
+            var token = GenerateJwtTokenAsync(phoneNumber, user);
+
+            user.Token = await token;
+
+            await signInManager.SignInAsync(user, true);
+
+            _context.Users.Add(user);
+            _context.SaveChanges();
 
             // Повернути JWT-токен відповідь
             return Ok(new { Token = token });
         }
 
-        private bool SendVerificationMessage(string phoneNumber)
-        {
-            int code = random.Next(1000, 9999);
-            string apiKey = "3487d50a";
-            string apiSecret = "yFZEZijVyklEgUS6";
-            string from = "+380 97 003 2909";
-            string message = $"Code pidtverdghnya: {code}";
-
-            var credentials = Credentials.FromApiKeyAndSecret(apiKey, apiSecret);
-            var vonageClient = new VonageClient(credentials);
-
-            var response = vonageClient.SmsClient.SendAnSms(new Vonage.Messaging.SendSmsRequest
-            {
-                To = phoneNumber,
-                From = from,
-                Text = message
-            });
-
-            if (response.Messages[0].Status == "0")
-            {
-                // Повідомлення успішно відправлено
-                return true;
-            }
-            else
-            {
-                // Сталася помилка при надсиланні повідомлення
-                return false;
-            }
-        }
-
-        private string GenerateJwtToken(string phoneNumber)
+        private async Task<string> GenerateJwtTokenAsync(string phoneNumber, User user)
         {
             // Отримати параметри JWT-токена з конфігурації
             var jwtSettings = _configuration.GetSection("JwtSettings").Get<JwtSettings>();
@@ -85,9 +88,15 @@ namespace uklon_backend.Controllers
 
             // Задати клейми для JWT-токена (якщо потрібно)
             var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, phoneNumber)
-        };
+            {
+                new Claim(ClaimTypes.Name, phoneNumber)
+            };
+
+            var roles = await userManager.GetRolesAsync(user);
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
             // Створити JWT-токен
             var tokenOptions = new JwtSecurityToken(

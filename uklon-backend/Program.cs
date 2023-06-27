@@ -1,7 +1,10 @@
 using BissnesLogic.Entites;
 using Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace uklon_backend
 {
@@ -19,6 +22,24 @@ namespace uklon_backend
 
             builder.Services.AddDbContext<UklonDbContext>(x => x.UseSqlServer(connectionString));
 
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(o =>
+            {
+                o.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration["JwtOptions:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtOptions:Key"])),
+                };
+            });
+
             builder.Services.AddIdentity<User, Roles>(options =>
             {
                 // Налаштування параметрів Identity за потребою
@@ -29,6 +50,8 @@ namespace uklon_backend
                 options.Password.RequiredLength = 6;
             })
             .AddEntityFrameworkStores<UklonDbContext>();
+
+            
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -45,6 +68,7 @@ namespace uklon_backend
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

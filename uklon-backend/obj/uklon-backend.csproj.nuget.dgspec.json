@@ -40,9 +40,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.19, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.19, )"
+            },
+            "Vonage": {
+              "target": "Package",
+              "version": "[6.6.0, )"
             }
           },
           "imports": [
@@ -175,6 +183,9 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
+              "D:\\Uklon\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj": {
+                "projectPath": "D:\\Uklon\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj"
+              },
               "D:\\Uklon\\uklon-backend\\Data\\Data.csproj": {
                 "projectPath": "D:\\Uklon\\uklon-backend\\Data\\Data.csproj"
               }
@@ -191,9 +202,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.19, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "Vonage": {
+              "target": "Package",
+              "version": "[6.6.0, )"
             }
           },
           "imports": [

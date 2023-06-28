@@ -40,9 +40,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.19, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.19, )"
+            },
+            "Twilio": {
+              "target": "Package",
+              "version": "[6.8.0, )"
             }
           },
           "imports": [
@@ -128,6 +136,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.19, )"
+            },
+            "Twilio": {
+              "target": "Package",
+              "version": "[6.8.0, )"
             }
           },
           "imports": [

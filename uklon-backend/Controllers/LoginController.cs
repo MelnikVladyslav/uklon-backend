@@ -48,6 +48,10 @@ namespace uklon_backend.Controllers
             var user = await userManager.FindByNameAsync(phoneNumber);
             bool isPassword = await userManager.CheckPasswordAsync(user, phoneNumberDto.Password);
 
+            if (user != null && !isPassword)
+            {
+                return BadRequest();
+            }
             if (user == null)
             {
                 user = new User()
@@ -59,11 +63,8 @@ namespace uklon_backend.Controllers
                 };
 
                 await userManager.CreateAsync(user, phoneNumberDto.Password);
-            }
-            if (user != null && !isPassword)
-            {
-                return BadRequest();
-            }
+                _context.Users.Add(user);
+            } 
 
             // Генерація JWT-токена
             var token = GenerateJwtTokenAsync(phoneNumber, user);
@@ -72,11 +73,10 @@ namespace uklon_backend.Controllers
 
             await signInManager.SignInAsync(user, true);
 
-            _context.Users.Add(user);
             _context.SaveChanges();
 
             // Повернути JWT-токен відповідь
-            return Ok(new { Token = token });
+            return Ok(new { Token = token});
         }
 
         private async Task<string> GenerateJwtTokenAsync(string phoneNumber, User user)

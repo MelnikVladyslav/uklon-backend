@@ -13,6 +13,7 @@ using System.Text;
 using Data;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
+using System.Security.Cryptography;
 
 namespace uklon_backend.Controllers
 {
@@ -77,6 +78,18 @@ namespace uklon_backend.Controllers
 
             // Повернути JWT-токен відповідь
             return Ok(new { Token = token});
+        }
+
+        private async Task<string> ComputeSHA256Hash(string password)
+        {
+
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+                byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+                string hashedPassword = BitConverter.ToString(hashBytes).Replace("-", string.Empty).ToLower();
+                return hashedPassword;  
+            }
         }
 
         private async Task<string> GenerateJwtTokenAsync(string phoneNumber, User user)

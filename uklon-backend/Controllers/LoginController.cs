@@ -14,6 +14,7 @@ using Data;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 using System.Security.Cryptography;
+using Twilio.Jwt.AccessToken;
 
 namespace uklon_backend.Controllers
 {
@@ -60,7 +61,7 @@ namespace uklon_backend.Controllers
                     UserName = phoneNumber,
                     PhoneNumber = phoneNumber,
                     RoleId = "Client",
-                    PasswordHash = phoneNumberDto.Password
+                    PasswordHash = await ComputeSHA256Hash(phoneNumberDto.Password)
                 };
 
                 await userManager.CreateAsync(user, phoneNumberDto.Password);
@@ -78,6 +79,41 @@ namespace uklon_backend.Controllers
 
             // Повернути JWT-токен відповідь
             return Ok(new { Token = token});
+        }
+
+        [HttpPost("found-or-create-user")]
+        public async Task<IActionResult> FoundCreateAsync(UserDTO user)
+        {
+            User foundUser;
+            string normEmail = userManager.NormalizeEmail(user.Email);
+
+            foundUser = await userManager.FindByEmailAsync(normEmail);
+            if (foundUser != null)
+            {
+                return Ok(foundUser);
+            }
+            else
+            {
+                foundUser = new User()
+                {
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    UserName = user.FirstName + " " + user.LastName,
+                    NormalizedUserName = userManager.NormalizeName(user.FirstName + " " + user.LastName),
+                    Email = user.Email,
+                    NormalizedEmail = userManager.NormalizeEmail(user.Email),
+                    PasswordHash = await ComputeSHA256Hash(user.Password),
+                    RoleId = "Client",
+                    PhoneNumber = user.PhoneNumber
+                };
+
+
+                foundUser.Token = await GenerateJwtTokenAsync(user.PhoneNumber, foundUser);
+
+                _context.Users.Add(foundUser);
+                _context.SaveChanges(true);
+                return Ok(foundUser);
+            }
         }
 
         private async Task<string> ComputeSHA256Hash(string password)

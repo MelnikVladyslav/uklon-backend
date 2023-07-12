@@ -38,6 +38,10 @@ namespace uklon_backend
                     ValidIssuer = builder.Configuration["JwtOptions:Issuer"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtOptions:Key"])),
                 };
+            }).AddGoogle(options =>
+            {
+                options.ClientId = "591542927270-vnutquq2rlevg0qrc9i2u04rs13qmohs.apps.googleusercontent.com";
+                options.ClientSecret = "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";
             });
 
             builder.Services.AddIdentity<User, Roles>(options =>

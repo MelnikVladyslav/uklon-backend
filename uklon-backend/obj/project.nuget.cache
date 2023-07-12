@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "wNd7CI/apELYxZHl/WLP8Wka/JhltCrrXwIDf5GFnss0LxiDHi7C4ptEqoQnkNxhTceI9g+wkUqrGD92PO2kqw==",
+  "dgSpecHash": "C8gGKhpTqc9EQM5xogWSZCm587dh8Fg89bDX5MwH9IVbiPX3wf99Usf8mh5XzHjVAkfwOGyLi/oSlGlEmTamwQ==",
   "success": true,
   "projectFilePath": "D:\\Uklon\\uklon-backend\\uklon-backend\\uklon-backend.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\HP elitebook G6 745\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\6.0.19\\microsoft.aspnetcore.authentication.google.6.0.19.nupkg.sha512",
     "C:\\Users\\HP elitebook G6 745\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.19\\microsoft.aspnetcore.authentication.jwtbearer.6.0.19.nupkg.sha512",
     "C:\\Users\\HP elitebook G6 745\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
     "C:\\Users\\HP elitebook G6 745\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.19\\microsoft.aspnetcore.cryptography.internal.6.0.19.nupkg.sha512",

@@ -9,6 +9,7 @@
       "uklon-backend/1.0.0": {
         "dependencies": {
           "Data": "1.0.0",
+          "Microsoft.AspNetCore.Authentication.Google": "6.0.19",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.19",
           "Microsoft.AspNetCore.Cors": "2.2.0",
           "Newtonsoft.Json": "13.0.3",
@@ -17,6 +18,14 @@
         },
         "runtime": {
           "uklon-backend.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Authentication.Google/6.0.19": {
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Authentication.Google.dll": {
+            "assemblyVersion": "6.0.19.0",
+            "fileVersion": "6.0.1923.31806"
+          }
         }
       },
       "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.19": {
@@ -772,6 +781,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Microsoft.AspNetCore.Authentication.Google/6.0.19": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kTCckDsCdPyPPzLZDjEQVHVGri9a8AvmEr3vfRmzbtgw1oYNxQB4RidX9VcbnPnqTJIbp9BrLP72yxbf+MgwCQ==",
+      "path": "microsoft.aspnetcore.authentication.google/6.0.19",
+      "hashPath": "microsoft.aspnetcore.authentication.google.6.0.19.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.19": {
       "type": "package",

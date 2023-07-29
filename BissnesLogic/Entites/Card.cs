@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace BissnesLogic.Entites
 {
-    public class Order
+    public class Card
     {
         public int Id { get; set; }
-        public decimal TotalPrice { get; set; }
-        public DateTime Date { get; set; }
+        public string Number { get; set; }
         public string UserId { get; set; }
         public User? User { get; set; }
-        public IEnumerable<Transport> Transports { get; set; } = new HashSet<Transport>();
     }
 }

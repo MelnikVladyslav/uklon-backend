@@ -15,6 +15,7 @@ using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 using System.Security.Cryptography;
 using Twilio.Jwt.AccessToken;
+using Microsoft.EntityFrameworkCore;
 
 namespace uklon_backend.Controllers
 {
@@ -114,6 +115,40 @@ namespace uklon_backend.Controllers
                 _context.SaveChanges(true);
                 return Ok(foundUser);
             }
+        }
+
+        [HttpPut("update-user/{id}")]
+        public async Task<IActionResult> UpdateUserAsync(UserDTO user, string id)
+        {
+            try
+            {
+                // Пошук моделі за ідентифікатором
+                var existingModel = await _context.Users.FindAsync(id);
+
+                if (existingModel == null)
+                    return NotFound();
+
+                // Оновлення полів моделі
+                existingModel.FirstName = user.FirstName;
+                existingModel.LastName = user.LastName;
+                existingModel.PhoneNumber = user.PhoneNumber;
+
+                // Зберегти зміни
+                await _context.SaveChangesAsync();
+
+                return Ok(existingModel);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Помилка при оновленні даних: {ex.Message}");
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        {
+            var users = await _context.Users.ToListAsync();
+            return Ok(users);
         }
 
         private async Task<string> ComputeSHA256Hash(string password)

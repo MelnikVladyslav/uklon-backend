@@ -50,5 +50,6 @@ namespace Data
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Transport> Transports { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Card> Cards { get; set; }
     }
 }

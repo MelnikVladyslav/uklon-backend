@@ -4,6 +4,7 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(UklonDbContext))]
-    partial class UklonDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230726122927_AddCard")]
+    partial class AddCard
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,17 +32,18 @@ namespace Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Cards");
                 });
@@ -59,13 +62,15 @@ namespace Data.Migrations
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Orders");
                 });
@@ -373,25 +378,25 @@ namespace Data.Migrations
                         new
                         {
                             Id = "Full",
-                            ConcurrencyStamp = "2580b584-d810-48f7-93ea-3cc4ba4e7be9",
+                            ConcurrencyStamp = "d407bd07-df0f-4b06-a7b1-de87b2492fe9",
                             Name = "Administrator"
                         },
                         new
                         {
                             Id = "Client",
-                            ConcurrencyStamp = "6522469c-9b74-4809-9419-8f729107216c",
+                            ConcurrencyStamp = "502514fa-ddeb-47f1-8039-627691f367b5",
                             Name = "Client"
                         },
                         new
                         {
                             Id = "Partner",
-                            ConcurrencyStamp = "e34da18e-0c9a-4dc3-a41a-9bb6d73704db",
+                            ConcurrencyStamp = "93357216-e516-4843-82a4-f5d5479ad9ea",
                             Name = "Bisness-partner"
                         },
                         new
                         {
                             Id = "Driver",
-                            ConcurrencyStamp = "34dc581a-fce4-416e-a0ee-36aed8232d8f",
+                            ConcurrencyStamp = "d4a2bf8d-6c73-4fc5-802c-2db3e18d77eb",
                             Name = "Driver"
                         });
                 });
@@ -425,9 +430,7 @@ namespace Data.Migrations
                 {
                     b.HasOne("BissnesLogic.Entites.User", "User")
                         .WithMany("Cards")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("User");
                 });
@@ -436,9 +439,7 @@ namespace Data.Migrations
                 {
                     b.HasOne("BissnesLogic.Entites.User", "User")
                         .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("User");
                 });

@@ -144,11 +144,47 @@ namespace uklon_backend.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("get-users")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             var users = await _context.Users.ToListAsync();
             return Ok(users);
+        }
+
+        [HttpPut("register-driver")]
+        public async Task<IActionResult> RegisterDriver(UserDTO user)
+        {
+            User foundUser;
+            string normEmail = userManager.NormalizeEmail(user.Email);
+
+            foundUser = await userManager.FindByEmailAsync(normEmail);
+            if (foundUser != null)
+            {
+                try
+                {
+                    // Пошук моделі за ідентифікатором
+                    var existingModel = await _context.Users.FindAsync(foundUser.Id);
+
+                    if (existingModel == null)
+                        return NotFound();
+
+                    // Оновлення полів моделі
+                    existingModel.RoleId = "Driver";
+
+                    // Зберегти зміни
+                    await _context.SaveChangesAsync();
+
+                    return Ok(existingModel);
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, $"Помилка при оновленні даних: {ex.Message}");
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         private async Task<string> ComputeSHA256Hash(string password)

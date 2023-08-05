@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "C8gGKhpTqc9EQM5xogWSZCm587dh8Fg89bDX5MwH9IVbiPX3wf99Usf8mh5XzHjVAkfwOGyLi/oSlGlEmTamwQ==",
+  "dgSpecHash": "T3oM6bsejXxbdStmUQRR0P3hKzLi1oxKY+b5sW3WCuk7Vz3HcpWYaWfVqWdNeU8nyenDh1Sib35pwORAO52Mag==",
   "success": true,
   "projectFilePath": "D:\\Uklon\\uklon-backend\\uklon-backend\\uklon-backend.csproj",
   "expectedPackageFiles": [
@@ -48,6 +48,8 @@
     "C:\\Users\\HP elitebook G6 745\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\HP elitebook G6 745\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\HP elitebook G6 745\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\HP elitebook G6 745\\.nuget\\packages\\npgsql\\6.0.8\\npgsql.6.0.8.nupkg.sha512",
+    "C:\\Users\\HP elitebook G6 745\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\6.0.8\\npgsql.entityframeworkcore.postgresql.6.0.8.nupkg.sha512",
     "C:\\Users\\HP elitebook G6 745\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\HP elitebook G6 745\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "C:\\Users\\HP elitebook G6 745\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",

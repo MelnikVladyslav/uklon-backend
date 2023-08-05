@@ -24,7 +24,7 @@ namespace Data
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-TF9TNEC;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            optionsBuilder.UseNpgsql(@"Server=localhost:5433;Database=drive_db;User ID=postgres;Password=Vladadmin2222");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

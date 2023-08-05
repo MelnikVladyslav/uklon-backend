@@ -148,3 +148,5 @@ D:\Uklon\uklon-backend\uklon-backend\bin\Debug\net6.0\Newtonsoft.Json.dll
 D:\Uklon\uklon-backend\uklon-backend\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
 D:\Uklon\uklon-backend\uklon-backend\bin\Debug\net6.0\Twilio.dll
 D:\Uklon\uklon-backend\uklon-backend\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Google.dll
+D:\Uklon\uklon-backend\uklon-backend\bin\Debug\net6.0\Npgsql.dll
+D:\Uklon\uklon-backend\uklon-backend\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll

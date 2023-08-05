@@ -14,13 +14,13 @@ namespace uklon_backend
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            string connectionString = builder.Configuration.GetConnectionString("localDb");
+            string connectionString = builder.Configuration.GetConnectionString("postgresSql");
 
             // Add services to the container.
 
             builder.Services.AddControllers();
 
-            builder.Services.AddDbContext<UklonDbContext>(x => x.UseSqlServer(connectionString));
+            builder.Services.AddDbContext<UklonDbContext>(x => x.UseNpgsql(connectionString));
 
             builder.Services.AddAuthentication(options =>
             {

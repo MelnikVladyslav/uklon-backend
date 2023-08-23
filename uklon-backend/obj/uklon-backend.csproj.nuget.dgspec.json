@@ -202,6 +202,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Inetlab.SMPP": {
+              "target": "Package",
+              "version": "[2.9.28, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[6.0.19, )"

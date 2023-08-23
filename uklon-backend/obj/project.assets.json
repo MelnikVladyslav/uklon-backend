@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "Inetlab.SMPP/2.9.28": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Inetlab.SMPP.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Inetlab.SMPP.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.19": {
         "type": "package",
         "dependencies": {
@@ -1260,6 +1273,27 @@
     }
   },
   "libraries": {
+    "Inetlab.SMPP/2.9.28": {
+      "sha512": "8ApwH4z/pxtNjc1h/wRGbPRwX6g3y5FJ5lSOx21qZvOmmrJJNy3QbHS2DoP5l2Wz5jhfgL4hjszIFYajHFiEBg==",
+      "type": "package",
+      "path": "inetlab.smpp/2.9.28",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "docs/Inetlab.SMPP-Documentation.pdf",
+        "images/icon.png",
+        "inetlab.smpp.2.9.28.nupkg.sha512",
+        "inetlab.smpp.nuspec",
+        "lib/net461/Inetlab.SMPP.dll",
+        "lib/net461/Inetlab.SMPP.xml",
+        "lib/net6.0/Inetlab.SMPP.dll",
+        "lib/net6.0/Inetlab.SMPP.xml",
+        "lib/netstandard2.0/Inetlab.SMPP.dll",
+        "lib/netstandard2.0/Inetlab.SMPP.xml"
+      ]
+    },
     "Microsoft.AspNetCore.Authentication.JwtBearer/6.0.19": {
       "sha512": "gdSF/N7ETakCeVONpiqHivv1aUY8DYXn/9CAi9UJuauSeRK0l0AM7kG5gB+e2zkl4o9zxrS6oVfkWT4lYLxCZw==",
       "type": "package",
@@ -3801,6 +3835,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "Data >= 1.0.0",
+      "Inetlab.SMPP >= 2.9.28",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.19",
       "Swashbuckle.AspNetCore >= 6.2.3",
       "Twilio >= 6.8.0"
@@ -3849,6 +3884,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "Inetlab.SMPP": {
+            "target": "Package",
+            "version": "[2.9.28, )"
+          },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
             "version": "[6.0.19, )"

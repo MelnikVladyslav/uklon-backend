@@ -13,19 +13,22 @@ using System.Text;
 using Data;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
+using Inetlab.SMPP;
+using Inetlab.SMPP.PDU;
 
 namespace uklon_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : ControllerBase
+
+    public class RegisterControler : ControllerBase
     {
-        private readonly IConfiguration _configuration; 
+        private readonly IConfiguration _configuration;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly UklonDbContext _context;
 
-        public LoginController(IConfiguration configuration, 
+        public RegisterControler(IConfiguration configuration,
                               UserManager<User> userManager,
                               SignInManager<User> signInManager,
                               UklonDbContext context)
@@ -36,8 +39,8 @@ namespace uklon_backend.Controllers
             _context = context;
         }
 
-        [HttpPost("login-phone")]
-        public async Task<IActionResult> LoginPhoneAsync(PhoneNumberVerificationDto phoneNumberDto)
+        [HttpPost("reg-phone")]
+        public async Task<IActionResult> RegisterPhoneAsync(PhoneNumberVerificationDto phoneNumberDto)
         {
             // Отримати номер телефона користувача з phoneNumberDto
             string phoneNumber = phoneNumberDto.PhoneNumber;
@@ -45,14 +48,14 @@ namespace uklon_backend.Controllers
             var user = await userManager.FindByNameAsync(phoneNumber);
             bool isPassword = await userManager.CheckPasswordAsync(user, phoneNumberDto.Password);
 
-            if (user != null && isPassword)
+            if (user != null && !isPassword)
             {
-                // return BadRequest();
+                return BadRequest();
             }
             if (user == null)
             {
                 user = new User()
-                { 
+                {
                     UserName = phoneNumber,
                     PhoneNumber = phoneNumber,
                     RoleId = "Client",
@@ -61,7 +64,7 @@ namespace uklon_backend.Controllers
 
                 await userManager.CreateAsync(user, phoneNumberDto.Password);
                 _context.Users.Add(user);
-            } 
+            }
 
             // Генерація JWT-токена
             var token = GenerateJwtTokenAsync(phoneNumber, user);
@@ -73,7 +76,7 @@ namespace uklon_backend.Controllers
             _context.SaveChanges();
 
             // Повернути JWT-токен відповідь
-            return Ok(new { Token = token});
+            return Ok(new { Token = token });
         }
 
         private async Task<string> GenerateJwtTokenAsync(string phoneNumber, User user)
@@ -109,5 +112,6 @@ namespace uklon_backend.Controllers
 
             return tokenString;
         }
+
     }
 }

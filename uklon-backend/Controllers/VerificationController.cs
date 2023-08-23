@@ -11,8 +11,9 @@ using System.Net;
 using System.Security.Claims;
 using System.Text;
 using Data;
-using Twilio;
-using Twilio.Rest.Api.V2010.Account;
+using Infobip.Api.Client.Api;
+using Infobip.Api.Client.Model;
+using Infobip.Api.Client;
 
 namespace uklon_backend.Controllers
 {
@@ -20,6 +21,9 @@ namespace uklon_backend.Controllers
     {
         private int Code = 0;
         Random rnd = new Random();
+        string BASE_URL = "https://zjw9e6.api.infobip.com";
+        string API_KEY = "c8dd9f00f407c4d2e873d266c7357bd6-958b431c-6834-48d2-b325-b3ce2cdf673a";
+        string SENDER = "Drive";        
 
         public VerificationController()
         {
@@ -27,31 +31,44 @@ namespace uklon_backend.Controllers
         }
 
         [HttpPost("verif-phone")]
-        public bool VerificatePhoneNumberAsync()
+        public bool VerificatePhoneNumberAsync(PhoneNumberVerificationDto phoneNumberDto)
         {
-            SendSMSAsync();
-                        
-
+            string phoneNumber = phoneNumberDto.PhoneNumber;
+            SendSMSAsync(phoneNumber); // Відправка смс працює лише з номерами з білого списку сервісу
             return false;
         }
 
-        private async void SendSMSAsync()
+        private async void SendSMSAsync(string RECIPIENT)
         {
-            // Find your Account SID and Auth Token at twilio.com/console
-            // and set the environment variables. See http://twil.io/secure
-            string accountSid = Environment.GetEnvironmentVariable("AC64091466eec192a51e0fce2ac48277e4");
-            string authToken = Environment.GetEnvironmentVariable("9a8a75d86e160039fc91565d6f0e3ce9");
+            string MESSAGE_TEXT = "Your Drive verification code: " + Code;
+            
+            var configuration = new Configuration() {
+                BasePath = BASE_URL,
+                ApiKeyPrefix = "App",
+                ApiKey = API_KEY 
+            };
+            
+            var sendSmsApi = new SendSmsApi(configuration);
+            var smsMessage = new SmsTextualMessage()
+            {
+                From = SENDER,
+                Destinations = new List<SmsDestination>()
+                {
+                    new SmsDestination(to: RECIPIENT)
+                },
+                Text = MESSAGE_TEXT
+            };
 
-            TwilioClient.Init(accountSid, authToken);
+            var smsRequest = new SmsAdvancedTextualRequest() {
+                Messages = new List<SmsTextualMessage>() { smsMessage }
+            };
 
-            var message = MessageResource.Create(
-                body: "Hello World!",
-                from: new Twilio.Types.PhoneNumber("+1 762 248 8758"),
-                to: new Twilio.Types.PhoneNumber("+38 098 762 2124")
-            );
-
-            Console.WriteLine(message.Sid);
+            try {
+                var smsResponse = sendSmsApi.SendSmsMessage(smsRequest);
+            }
+            catch (ApiException apiException) {
+                throw (System.Exception)apiException.ErrorContent;
+            }
         }
-
     }
 }

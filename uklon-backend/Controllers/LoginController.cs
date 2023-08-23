@@ -11,8 +11,6 @@ using System.Net;
 using System.Security.Claims;
 using System.Text;
 using Data;
-using Twilio;
-using Twilio.Rest.Api.V2010.Account;
 
 namespace uklon_backend.Controllers
 {

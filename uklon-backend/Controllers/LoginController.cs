@@ -74,6 +74,46 @@ namespace uklon_backend.Controllers
             return Ok(new { Token = token });
         }
 
+        [HttpPost("login-email")]
+        public async Task<IActionResult> LoginEmailAsync(PhoneNumberVerificationDto phoneNumberDto)
+        {
+            // Отримати номер телефона користувача з phoneNumberDto
+            string emailAddress = phoneNumberDto.Email;
+
+            var user = await userManager.FindByNameAsync(emailAddress);
+            bool isPassword = await userManager.CheckPasswordAsync(user, phoneNumberDto.Password);
+
+            if (user != null && isPassword)
+            {
+                // return BadRequest();
+            }
+            if (user == null)
+            {
+                user = new User()
+                {
+                    UserName = emailAddress,
+                    Email = emailAddress,
+                    RoleId = "Client",
+                    PasswordHash = phoneNumberDto.Password
+                };
+
+                await userManager.CreateAsync(user, phoneNumberDto.Password);
+                _context.Users.Add(user);
+            }
+
+            // Генерація JWT-токена
+            var token = GenerateJwtTokenAsync(emailAddress, user);
+
+            user.Token = await token;
+
+            await signInManager.SignInAsync(user, true);
+
+            _context.SaveChanges();
+
+            // Повернути JWT-токен відповідь
+            return Ok(new { Token = token });
+        }
+
         private async Task<string> GenerateJwtTokenAsync(string phoneNumber, User user)
         {
             // Отримати параметри JWT-токена з конфігурації

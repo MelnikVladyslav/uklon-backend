@@ -4023,11 +4023,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Projs\\uklon-backend\\uklon-backend\\uklon-backend\\uklon-backend.csproj",
+      "projectUniqueName": "F:\\Projs\\uklon-backend\\uklon-backend\\uklon-backend.csproj",
       "projectName": "uklon-backend",
-      "projectPath": "F:\\Projs\\uklon-backend\\uklon-backend\\uklon-backend\\uklon-backend.csproj",
+      "projectPath": "F:\\Projs\\uklon-backend\\uklon-backend\\uklon-backend.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "F:\\Projs\\uklon-backend\\uklon-backend\\uklon-backend\\obj\\",
+      "outputPath": "F:\\Projs\\uklon-backend\\uklon-backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4044,8 +4044,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "F:\\Projs\\uklon-backend\\uklon-backend\\Data\\Data.csproj": {
-              "projectPath": "F:\\Projs\\uklon-backend\\uklon-backend\\Data\\Data.csproj"
+            "F:\\Projs\\uklon-backend\\Data\\Data.csproj": {
+              "projectPath": "F:\\Projs\\uklon-backend\\Data\\Data.csproj"
             }
           }
         }

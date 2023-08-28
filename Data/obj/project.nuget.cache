@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nerxq/XWIaaYZCA1K7zn4vj99kBNqk6aWqnFMmC85a01rqyA+rFyhy5Y0n/sEZXflWFJp2pYXQZJBa7rp9enMQ==",
+  "dgSpecHash": "KNOJSFoVHcPztfPqGZEhjY9ouwchPzE2INsGhKkxOXPk5NKEbhDeSZWMZAD1YcKyOlUg1FpLDqyrvwsUMvY1wQ==",
   "success": true,
-  "projectFilePath": "F:\\Projs\\uklon-backend\\uklon-backend\\Data\\Data.csproj",
+  "projectFilePath": "F:\\Projs\\uklon-backend\\Data\\Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.19\\microsoft.aspnetcore.authentication.jwtbearer.6.0.19.nupkg.sha512",

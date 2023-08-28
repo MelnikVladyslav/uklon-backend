@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Projs\\uklon-backend\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj": {}
+    "F:\\Projs\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj": {}
   },
   "projects": {
-    "F:\\Projs\\uklon-backend\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj": {
+    "F:\\Projs\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Projs\\uklon-backend\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj",
+        "projectUniqueName": "F:\\Projs\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj",
         "projectName": "BissnesLogic",
-        "projectPath": "F:\\Projs\\uklon-backend\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj",
+        "projectPath": "F:\\Projs\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "F:\\Projs\\uklon-backend\\uklon-backend\\BissnesLogic\\obj\\",
+        "outputPath": "F:\\Projs\\uklon-backend\\BissnesLogic\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",

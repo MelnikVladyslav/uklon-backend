@@ -3682,11 +3682,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Projs\\uklon-backend\\uklon-backend\\Data\\Data.csproj",
+      "projectUniqueName": "F:\\Projs\\uklon-backend\\Data\\Data.csproj",
       "projectName": "Data",
-      "projectPath": "F:\\Projs\\uklon-backend\\uklon-backend\\Data\\Data.csproj",
+      "projectPath": "F:\\Projs\\uklon-backend\\Data\\Data.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "F:\\Projs\\uklon-backend\\uklon-backend\\Data\\obj\\",
+      "outputPath": "F:\\Projs\\uklon-backend\\Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3703,8 +3703,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "F:\\Projs\\uklon-backend\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj": {
-              "projectPath": "F:\\Projs\\uklon-backend\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj"
+            "F:\\Projs\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj": {
+              "projectPath": "F:\\Projs\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj"
             }
           }
         }

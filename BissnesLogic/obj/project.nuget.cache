@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IORwL63CwtShBxJmV0NwCjHsB4ro/I2O0fhkeAuQLugyOBoEWwwQJbA8vPorgBkeD++cR8SAVJULbtVkDDRg6A==",
+  "dgSpecHash": "uwcNsC/UiYjc+Ka8gQYoaq7vBQyPhiThKBnnRRMkQQ+PXxqUVuB41vktmrn18F7yVChGAkUS9mYp54zi3lLafA==",
   "success": true,
-  "projectFilePath": "F:\\Projs\\uklon-backend\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj",
+  "projectFilePath": "F:\\Projs\\uklon-backend\\BissnesLogic\\BissnesLogic.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.19\\microsoft.aspnetcore.authentication.jwtbearer.6.0.19.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.19\\microsoft.aspnetcore.cryptography.internal.6.0.19.nupkg.sha512",

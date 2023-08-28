@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FE30awgaKJ94dfMnb/6cFOA9cOlJDEee2vS72DpkIlliaIOY7PQ7ZcZD5NygglO0WLvAtrB0L5TCksOXynC8cA==",
+  "dgSpecHash": "rKWjh0uKlw+Sk3Ed9+xqVdwhMO5I6IgnCayuvKAf7nYwkxPCblheQfH5eaABTRaxnJtZAdhTXnkJfDFHvym4NQ==",
   "success": true,
-  "projectFilePath": "F:\\Projs\\uklon-backend\\uklon-backend\\uklon-backend\\uklon-backend.csproj",
+  "projectFilePath": "F:\\Projs\\uklon-backend\\uklon-backend\\uklon-backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\inetlab.smpp\\2.9.28\\inetlab.smpp.2.9.28.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\infobip.api.client\\2.1.2\\infobip.api.client.2.1.2.nupkg.sha512",

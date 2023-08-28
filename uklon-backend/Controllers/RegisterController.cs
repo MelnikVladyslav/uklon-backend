@@ -11,19 +11,22 @@ using System.Net;
 using System.Security.Claims;
 using System.Text;
 using Data;
+using Inetlab.SMPP;
+using Inetlab.SMPP.PDU;
 
 namespace uklon_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : ControllerBase
+
+    public class RegisterControler : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly UklonDbContext _context;
 
-        public LoginController(IConfiguration configuration,
+        public RegisterControler(IConfiguration configuration,
                               UserManager<User> userManager,
                               SignInManager<User> signInManager,
                               UklonDbContext context)
@@ -34,8 +37,8 @@ namespace uklon_backend.Controllers
             _context = context;
         }
 
-        [HttpPost("login-phone")]
-        public async Task<IActionResult> LoginPhoneAsync(PhoneNumberVerificationDto phoneNumberDto)
+        [HttpPost("reg-phone")]
+        public async Task<IActionResult> RegisterPhoneAsync(PhoneNumberVerificationDto phoneNumberDto)
         {
             // Отримати номер телефона користувача з phoneNumberDto
             string phoneNumber = phoneNumberDto.PhoneNumber;
@@ -43,9 +46,9 @@ namespace uklon_backend.Controllers
             var user = await userManager.FindByNameAsync(phoneNumber);
             bool isPassword = await userManager.CheckPasswordAsync(user, phoneNumberDto.Password);
 
-            if (user != null && isPassword)
+            if (user != null && !isPassword)
             {
-                // return BadRequest();
+                return BadRequest();
             }
             if (user == null)
             {
@@ -63,46 +66,6 @@ namespace uklon_backend.Controllers
 
             // Генерація JWT-токена
             var token = GenerateJwtTokenAsync(phoneNumber, user);
-
-            user.Token = await token;
-
-            await signInManager.SignInAsync(user, true);
-
-            _context.SaveChanges();
-
-            // Повернути JWT-токен відповідь
-            return Ok(new { Token = token });
-        }
-
-        [HttpPost("login-email")]
-        public async Task<IActionResult> LoginEmailAsync(PhoneNumberVerificationDto phoneNumberDto)
-        {
-            // Отримати номер телефона користувача з phoneNumberDto
-            string emailAddress = phoneNumberDto.Email;
-
-            var user = await userManager.FindByNameAsync(emailAddress);
-            bool isPassword = await userManager.CheckPasswordAsync(user, phoneNumberDto.Password);
-
-            if (user != null && isPassword)
-            {
-                // return BadRequest();
-            }
-            if (user == null)
-            {
-                user = new User()
-                {
-                    UserName = emailAddress,
-                    Email = emailAddress,
-                    RoleId = "Client",
-                    PasswordHash = phoneNumberDto.Password
-                };
-
-                await userManager.CreateAsync(user, phoneNumberDto.Password);
-                _context.Users.Add(user);
-            }
-
-            // Генерація JWT-токена
-            var token = GenerateJwtTokenAsync(emailAddress, user);
 
             user.Token = await token;
 
@@ -147,5 +110,6 @@ namespace uklon_backend.Controllers
 
             return tokenString;
         }
+
     }
 }

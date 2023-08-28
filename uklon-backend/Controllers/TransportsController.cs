@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace uklon_backend.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TransportsController : ControllerBase

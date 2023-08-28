@@ -19,6 +19,8 @@ namespace BissnesLogic.Entites
             public int Id { get; set; }
             [Required, MinLength(3)]
             public string Name { get; set; }
+            [Range(0, 100_000)]
+            public decimal Price { get; set; }
 
             public ICollection<Transport> Transports { get; set; } = new HashSet<Transport>();
         }

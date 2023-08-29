@@ -21,7 +21,6 @@ namespace Data
                     Id = 1,
                     Model = "Test Car",
                     TypeId = (int)TypesC.Standart,
-                    Price = 2000,
                     Description = "Test standart car",
                     ImagePath = @"https://cdn2.rcstatic.com/images/rc-guides/Economy_Cars/stan.jpg"
                 }
@@ -32,9 +31,9 @@ namespace Data
         {
             modelBuilder.Entity<Types>().HasData(new Types[]
             {
-                new Types() { Id = (int)TypesC.Standart, Name = "Standart" },
-                new Types() { Id = (int)TypesC.Ekonom, Name = "Ekonom" },
-                new Types() { Id = (int)TypesC.Bisness, Name = "Bisness" },
+                new Types() { Id = (int)TypesC.Standart, Name = "Standart", Price = 70 },
+                new Types() { Id = (int)TypesC.Ekonom, Name = "Ekonom", Price = 50  },
+                new Types() { Id = (int)TypesC.Bisness, Name = "Bisness", Price = 100  },
             });
         }
 

@@ -36,10 +36,10 @@ namespace uklon_backend.Controllers
             }
         }
 
-        [HttpGet("get-orders/{id}")]
-        public async Task<ActionResult<IEnumerable<Order>>> GetOrdersById(string id)
+        [HttpGet("get-orders")]
+        public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         {
-            var orders = await _context.Orders.Where(t => t.UserId == id).ToListAsync();
+            var orders = await _context.Orders.ToListAsync();
             return Ok(orders);
         }
     }

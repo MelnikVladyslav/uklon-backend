@@ -45,6 +45,27 @@ namespace Data.Migrations
                     b.ToTable("Cards");
                 });
 
+            modelBuilder.Entity("BissnesLogic.Entites.News", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("News");
+                });
+
             modelBuilder.Entity("BissnesLogic.Entites.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -385,25 +406,25 @@ namespace Data.Migrations
                         new
                         {
                             Id = "Full",
-                            ConcurrencyStamp = "bd423adf-a461-424e-9a8a-203d5b9fb0d9",
+                            ConcurrencyStamp = "3f7e47d3-71ba-4d50-9920-7e5a5c995a09",
                             Name = "Administrator"
                         },
                         new
                         {
                             Id = "Client",
-                            ConcurrencyStamp = "e8e0fb93-dcfa-4573-a4e9-4ca5d4fba9cd",
+                            ConcurrencyStamp = "4944c646-051b-421e-9b31-4ac9d1f74498",
                             Name = "Client"
                         },
                         new
                         {
                             Id = "Partner",
-                            ConcurrencyStamp = "806dce42-4ab7-4013-985f-314347d67e44",
+                            ConcurrencyStamp = "e8613c14-9005-4a45-a35b-b1da7592d0a5",
                             Name = "Bisness-partner"
                         },
                         new
                         {
                             Id = "Driver",
-                            ConcurrencyStamp = "0da9b3bd-46f5-4f77-8ebc-d6b90c848cb0",
+                            ConcurrencyStamp = "487a9047-4c92-4c60-a5e4-88bbe8f13d3d",
                             Name = "Driver"
                         });
                 });

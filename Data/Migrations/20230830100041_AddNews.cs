@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -8,11 +9,53 @@ namespace Data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Url",
-                table: "AspNetUsers",
-                type: "text",
-                nullable: true);
+            migrationBuilder.CreateTable(
+                name: "News",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Text = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_News", x => x.Id);
+                });
+
+            migrationBuilder.UpdateData(
+                table: "AspNetRoles",
+                keyColumn: "Id",
+                keyValue: "Client",
+                column: "ConcurrencyStamp",
+                value: "4944c646-051b-421e-9b31-4ac9d1f74498");
+
+            migrationBuilder.UpdateData(
+                table: "AspNetRoles",
+                keyColumn: "Id",
+                keyValue: "Driver",
+                column: "ConcurrencyStamp",
+                value: "487a9047-4c92-4c60-a5e4-88bbe8f13d3d");
+
+            migrationBuilder.UpdateData(
+                table: "AspNetRoles",
+                keyColumn: "Id",
+                keyValue: "Full",
+                column: "ConcurrencyStamp",
+                value: "3f7e47d3-71ba-4d50-9920-7e5a5c995a09");
+
+            migrationBuilder.UpdateData(
+                table: "AspNetRoles",
+                keyColumn: "Id",
+                keyValue: "Partner",
+                column: "ConcurrencyStamp",
+                value: "e8613c14-9005-4a45-a35b-b1da7592d0a5");
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropTable(
+                name: "News");
 
             migrationBuilder.UpdateData(
                 table: "AspNetRoles",
@@ -41,41 +84,6 @@ namespace Data.Migrations
                 keyValue: "Partner",
                 column: "ConcurrencyStamp",
                 value: "806dce42-4ab7-4013-985f-314347d67e44");
-        }
-
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropColumn(
-                name: "Url",
-                table: "AspNetUsers");
-
-            migrationBuilder.UpdateData(
-                table: "AspNetRoles",
-                keyColumn: "Id",
-                keyValue: "Client",
-                column: "ConcurrencyStamp",
-                value: "90217a5d-9183-49a4-becf-e7e95e30f1a8");
-
-            migrationBuilder.UpdateData(
-                table: "AspNetRoles",
-                keyColumn: "Id",
-                keyValue: "Driver",
-                column: "ConcurrencyStamp",
-                value: "4463f192-7654-4f98-a70c-7e97718c6ce2");
-
-            migrationBuilder.UpdateData(
-                table: "AspNetRoles",
-                keyColumn: "Id",
-                keyValue: "Full",
-                column: "ConcurrencyStamp",
-                value: "10d7ed1e-ade2-4a2d-b29f-52b4c1c6d5d8");
-
-            migrationBuilder.UpdateData(
-                table: "AspNetRoles",
-                keyColumn: "Id",
-                keyValue: "Partner",
-                column: "ConcurrencyStamp",
-                value: "cd637d71-bafb-4e03-b438-54ea5caa168f");
         }
     }
 }

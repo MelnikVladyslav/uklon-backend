@@ -11,11 +11,10 @@ using System.Net;
 using System.Security.Claims;
 using System.Text;
 using Data;
+using Microsoft.Extensions.Configuration;
+using Infobip.Api.Client;
 using Infobip.Api.Client.Api;
 using Infobip.Api.Client.Model;
-using Infobip.Api.Client;
-using Microsoft.Extensions.Configuration;
-
 
 namespace uklon_backend.Controllers
 {

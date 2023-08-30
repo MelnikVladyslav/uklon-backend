@@ -4,6 +4,7 @@ using Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace uklon_backend.Controllers
 {
@@ -41,6 +42,18 @@ namespace uklon_backend.Controllers
         {
             var orders = await _context.Orders.Where(t => t.UserId == id).ToListAsync();
             return Ok(orders);
+        }
+
+        [HttpPut("set-rating")]
+        public async Task<IActionResult> SetRatingAsync(int rating, Order order)
+        {
+            if (rating <= 0 || rating > 5)
+                return BadRequest();
+
+            _context.Orders.Find(order).Rating = rating;
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
     }
 }

@@ -11,11 +11,9 @@ using System.Net;
 using System.Security.Claims;
 using System.Text;
 using Data;
-using Twilio;
-using Twilio.Rest.Api.V2010.Account;
-using System.Security.Cryptography;
-using Twilio.Jwt.AccessToken;
 using Microsoft.EntityFrameworkCore;
+using Twilio.Jwt.AccessToken;
+using System.Security.Cryptography;
 
 namespace uklon_backend.Controllers
 {
@@ -23,14 +21,12 @@ namespace uklon_backend.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        private readonly IConfiguration _configuration; 
+        private readonly IConfiguration _configuration;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly UklonDbContext _context;
-        Random random = new Random();
-        int code = 0;
 
-        public LoginController(IConfiguration configuration, 
+        public LoginController(IConfiguration configuration,
                               UserManager<User> userManager,
                               SignInManager<User> signInManager,
                               UklonDbContext context)
@@ -39,7 +35,6 @@ namespace uklon_backend.Controllers
             this.signInManager = signInManager;
             _configuration = configuration;
             _context = context;
-            code = random.Next(1000, 9999);
         }
 
         [HttpPost("login-phone")]
@@ -51,23 +46,23 @@ namespace uklon_backend.Controllers
             var user = await userManager.FindByNameAsync(phoneNumber);
             bool isPassword = await userManager.CheckPasswordAsync(user, phoneNumberDto.Password);
 
-            if (user != null && !isPassword)
+            if (user != null && isPassword)
             {
-                return BadRequest();
+                // return BadRequest();
             }
             if (user == null)
             {
                 user = new User()
-                { 
+                {
                     UserName = phoneNumber,
                     PhoneNumber = phoneNumber,
                     RoleId = "Client",
-                    PasswordHash = await ComputeSHA256Hash(phoneNumberDto.Password)
+                    PasswordHash = phoneNumberDto.Password
                 };
 
                 await userManager.CreateAsync(user, phoneNumberDto.Password);
                 _context.Users.Add(user);
-            } 
+            }
 
             // Генерація JWT-токена
             var token = GenerateJwtTokenAsync(phoneNumber, user);
@@ -79,7 +74,47 @@ namespace uklon_backend.Controllers
             _context.SaveChanges();
 
             // Повернути JWT-токен відповідь
-            return Ok(new { Token = token});
+            return Ok(new { Token = token });
+        }
+
+        [HttpPost("login-email")]
+        public async Task<IActionResult> LoginEmailAsync(PhoneNumberVerificationDto phoneNumberDto)
+        {
+            // Отримати номер телефона користувача з phoneNumberDto
+            string emailAddress = phoneNumberDto.Email;
+
+            var user = await userManager.FindByNameAsync(emailAddress);
+            bool isPassword = await userManager.CheckPasswordAsync(user, phoneNumberDto.Password);
+
+            if (user != null && isPassword)
+            {
+                // return BadRequest();
+            }
+            if (user == null)
+            {
+                user = new User()
+                {
+                    UserName = emailAddress,
+                    Email = emailAddress,
+                    RoleId = "Client",
+                    PasswordHash = phoneNumberDto.Password
+                };
+
+                await userManager.CreateAsync(user, phoneNumberDto.Password);
+                _context.Users.Add(user);
+            }
+
+            // Генерація JWT-токена
+            var token = GenerateJwtTokenAsync(emailAddress, user);
+
+            user.Token = await token;
+
+            await signInManager.SignInAsync(user, true);
+
+            _context.SaveChanges();
+
+            // Повернути JWT-токен відповідь
+            return Ok(new { Token = token });
         }
 
         [HttpPost("found-or-create-user")]
@@ -195,7 +230,7 @@ namespace uklon_backend.Controllers
                 byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
                 byte[] hashBytes = sha256.ComputeHash(passwordBytes);
                 string hashedPassword = BitConverter.ToString(hashBytes).Replace("-", string.Empty).ToLower();
-                return hashedPassword;  
+                return hashedPassword;
             }
         }
 

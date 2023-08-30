@@ -18,9 +18,6 @@ namespace BissnesLogic.Entites
         public int TypeId { get; set; }
         public Types? Type { get; set; }
 
-        [Range(0, 100_000)]
-        public decimal Price { get; set; }
-
         [StringLength(255, MinimumLength = 10)]
         public string? Description { get; set; }
 

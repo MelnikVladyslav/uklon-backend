@@ -12,7 +12,6 @@ using System.Security.Claims;
 using System.Text;
 using Data;
 using Microsoft.EntityFrameworkCore;
-using Twilio.Jwt.AccessToken;
 using System.Security.Cryptography;
 
 namespace uklon_backend.Controllers

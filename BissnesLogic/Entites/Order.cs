@@ -16,6 +16,7 @@ namespace BissnesLogic.Entites
         public string StartPoint { get; set; }
         public string EndPoint { get; set; }
         public User? User { get; set; }
+        public int Rating { get; set; }
         public IEnumerable<Transport> Transports { get; set; } = new HashSet<Transport>();
     }
 }

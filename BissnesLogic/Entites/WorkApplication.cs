@@ -11,5 +11,6 @@ namespace BissnesLogic.Entites
         public int Id { get; set; }
         public User ApplicationUser { get; set; }
         public DateTime ApplicationDateTime { get; set; }
+        public string Status { get; set; }
     }
 }

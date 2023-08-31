@@ -38,12 +38,12 @@ namespace uklon_backend.Controllers
             _context = context;
         }
 
-        [HttpPut("make-applicaiton")]
-        public async Task<IActionResult> MakeApplicationAsync(User _user)
-        {
+        //[HttpPut("make-applicaiton")]
+        //public async Task<IActionResult> MakeApplicationAsync(User _user)
+        //{
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
         [HttpDelete]
         public async Task<IActionResult> DeleteUser(PhoneNumberVerificationDto phoneNumberDto)

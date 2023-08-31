@@ -18,6 +18,8 @@ using Infobip.Api.Client.Model;
 
 namespace uklon_backend.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class VerificationController : ControllerBase
     {
         private int Code = 0;

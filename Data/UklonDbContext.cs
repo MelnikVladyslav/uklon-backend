@@ -9,6 +9,7 @@ using System.Numerics;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using Twilio.TwiML.Voice;
 
 namespace Data
 {
@@ -52,5 +53,6 @@ namespace Data
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Card> Cards { get; set; }
         public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<Application> Applications { get; set; }
     }
 }

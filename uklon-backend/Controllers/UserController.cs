@@ -13,22 +13,21 @@ using System.Text;
 using Data;
 using Inetlab.SMPP;
 using Inetlab.SMPP.PDU;
-using Twilio.Jwt.AccessToken;
 
 
 namespace uklon_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
-    public class DeleteUserController : ControllerBase
+
+    public class UserController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly UklonDbContext _context;
 
-        public DeleteUserController(IConfiguration configuration,
+        public UserController(IConfiguration configuration,
                               UserManager<User> userManager,
                               SignInManager<User> signInManager,
                               UklonDbContext context)
@@ -37,6 +36,13 @@ namespace uklon_backend.Controllers
             this.signInManager = signInManager;
             _configuration = configuration;
             _context = context;
+        }
+
+        [HttpPut("make-applicaiton")]
+        public async Task<IActionResult> MakeApplicationAsync(User _user)
+        {
+
+            return Ok();
         }
 
         [HttpDelete]

@@ -221,6 +221,39 @@ namespace uklon_backend.Controllers
             }
         }
 
+        [HttpPut("register-corp")]
+        public async Task<IActionResult> RegisterCorp(UserDTO user)
+        {
+            User foundUser;
+            string normEmail = userManager.NormalizeEmail(user.Email);
+
+            foundUser = await userManager.FindByEmailAsync(normEmail);
+            if (foundUser != null)
+            {
+                try
+                {
+                    var existingModel = await _context.Users.FindAsync(foundUser.Id);
+
+                    if (existingModel == null)
+                        return NotFound();
+
+                    existingModel.RoleId = "Corporation";
+
+                    await _context.SaveChangesAsync();
+
+                    return Ok(existingModel);
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, $"Помилка при оновленні даних: {ex.Message}");
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
         private async Task<string> ComputeSHA256Hash(string password)
         {
 

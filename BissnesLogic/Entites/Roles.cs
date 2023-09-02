@@ -14,7 +14,8 @@ namespace BissnesLogic.Entites
         Full = 1,
         Driver,
         Partner,
-        Client
+        Client,
+        Corporation
     }
 
     public class Roles : IdentityRole

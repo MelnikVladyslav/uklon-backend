@@ -45,6 +45,7 @@ namespace Data
                 new Roles() { Id = TypesD.Client.ToString(), Name = "Client" },
                 new Roles() { Id = TypesD.Partner.ToString(), Name = "Bisness-partner" },
                 new Roles() { Id = TypesD.Driver.ToString(), Name = "Driver" },
+                new Roles() { Id = TypesD.Corporation.ToString(), Name = "Corporation" },
             });
         }
     }

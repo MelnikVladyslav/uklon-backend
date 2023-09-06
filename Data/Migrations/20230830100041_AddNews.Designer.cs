@@ -3,6 +3,7 @@ using System;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(UklonDbContext))]
-    partial class UklonDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230830100041_AddNews")]
+    partial class AddNews
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,9 +82,6 @@ namespace Data.Migrations
                     b.Property<string>("EndPoint")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("integer");
 
                     b.Property<string>("StartPoint")
                         .IsRequired()
@@ -409,32 +408,26 @@ namespace Data.Migrations
                         new
                         {
                             Id = "Full",
-                            ConcurrencyStamp = "d8ea031f-a6f2-4240-aed2-26f772505056",
+                            ConcurrencyStamp = "3f7e47d3-71ba-4d50-9920-7e5a5c995a09",
                             Name = "Administrator"
                         },
                         new
                         {
                             Id = "Client",
-                            ConcurrencyStamp = "ba624409-16af-42c8-840d-a84e7161fafc",
+                            ConcurrencyStamp = "4944c646-051b-421e-9b31-4ac9d1f74498",
                             Name = "Client"
                         },
                         new
                         {
                             Id = "Partner",
-                            ConcurrencyStamp = "4dbb307e-3f11-4d67-b78a-e3e1b5aebb14",
+                            ConcurrencyStamp = "e8613c14-9005-4a45-a35b-b1da7592d0a5",
                             Name = "Bisness-partner"
                         },
                         new
                         {
                             Id = "Driver",
-                            ConcurrencyStamp = "29e3e874-11b8-44c4-85b0-a0e4b235f679",
+                            ConcurrencyStamp = "487a9047-4c92-4c60-a5e4-88bbe8f13d3d",
                             Name = "Driver"
-                        },
-                        new
-                        {
-                            Id = "Corporation",
-                            ConcurrencyStamp = "8cfffe1b-d422-482c-bf17-108f26b714ca",
-                            Name = "Corporation"
                         });
                 });
 

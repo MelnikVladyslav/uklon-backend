@@ -3,6 +3,7 @@ using System;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(UklonDbContext))]
-    partial class UklonDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230906085757_AddUrl")]
+    partial class AddUrl
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -409,31 +411,31 @@ namespace Data.Migrations
                         new
                         {
                             Id = "Full",
-                            ConcurrencyStamp = "6ee510de-417f-49a0-b229-eb165ac3002b",
+                            ConcurrencyStamp = "46aac44c-c17f-42bd-80f5-122966df9bb1",
                             Name = "Administrator"
                         },
                         new
                         {
                             Id = "Client",
-                            ConcurrencyStamp = "6a000ab2-2640-480e-8ede-93469820fbb7",
+                            ConcurrencyStamp = "624781ba-1b3d-4edc-be06-207a4e0a8d89",
                             Name = "Client"
                         },
                         new
                         {
                             Id = "Partner",
-                            ConcurrencyStamp = "47c4e181-df96-449e-9845-12b688d2c0d8",
+                            ConcurrencyStamp = "70fc2560-0cd7-4c4e-9529-bcc0870dbced",
                             Name = "Bisness-partner"
                         },
                         new
                         {
                             Id = "Driver",
-                            ConcurrencyStamp = "5da52cd0-a6dc-4738-ba9a-f80732f3aaf9",
+                            ConcurrencyStamp = "ced7681f-cb97-42ae-bfe2-f0f9b514a124",
                             Name = "Driver"
                         },
                         new
                         {
                             Id = "Corporation",
-                            ConcurrencyStamp = "924ee1c8-206c-45cd-aaf5-6b20324d868e",
+                            ConcurrencyStamp = "5edd6043-feeb-415a-855b-11d3e65870a3",
                             Name = "Corporation"
                         });
                 });
@@ -455,10 +457,6 @@ namespace Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Token")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Url")
                         .IsRequired()
                         .HasColumnType("text");
 

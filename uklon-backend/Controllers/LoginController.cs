@@ -166,6 +166,8 @@ namespace uklon_backend.Controllers
                 existingModel.FirstName = user.FirstName;
                 existingModel.LastName = user.LastName;
                 existingModel.PhoneNumber = user.PhoneNumber;
+                existingModel.Email = user.Email;
+                existingModel.Url = user.Url;
 
                 // Зберегти зміни
                 await _context.SaveChangesAsync();

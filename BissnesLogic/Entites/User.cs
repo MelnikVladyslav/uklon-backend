@@ -22,5 +22,6 @@ namespace BissnesLogic.Entites
         public string Url { get; set; }
         public ICollection<Order> Orders { get; set; } = new HashSet<Order>();
         public ICollection<Card> Cards { get; set; } = new HashSet<Card>();
+        public ICollection<SelAdress> FavoritePlace { get; set; } = new HashSet<SelAdress>();
     }
 }

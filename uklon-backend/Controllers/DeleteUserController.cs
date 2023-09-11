@@ -40,18 +40,16 @@ namespace uklon_backend.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteUser(PhoneNumberVerificationDto phoneNumberDto)
+        public async Task<IActionResult> DeleteUser(User user)
         {
-            string phoneNumber = phoneNumberDto.PhoneNumber;
+            var delUser = await userManager.FindByIdAsync(user.Id);
 
-            var user = await userManager.FindByNameAsync(phoneNumber);
-
-            if (user == null)
+            if (delUser == null)
             {
                 return NotFound();
             }
 
-            userManager.DeleteAsync(user);
+            await userManager.DeleteAsync(delUser);
 
             return Ok();
         }

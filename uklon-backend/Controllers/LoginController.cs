@@ -329,8 +329,7 @@ namespace uklon_backend.Controllers
 
             try
             {
-                // Генерувати випадкове ім'я для файлу
-                var fileName = "photo" + Path.GetExtension(imageFile.FileName);
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
 
                 // Шлях для збереження файлу на сервері
                 var filePath = Path.Combine("uploads", fileName);
@@ -361,6 +360,42 @@ namespace uklon_backend.Controllers
             {
                 return BadRequest(new { error = ex.Message });
             }
+        }
+
+        [HttpGet("api/photos/{photoId}")]
+        public IActionResult GetPhoto(string photoId)
+        {
+            // Шукайте фотографію за її ідентифікатором photoId в базі даних або на сервері.
+            // Отримайте її байти.
+            byte[] photoBytes = GetPhotoBytes(photoId);
+
+            if (photoBytes == null)
+            {
+                return NotFound(); // Фотографію не знайдено, поверніть 404 Not Found.
+            }
+
+            // Встановлюйте заголовки відповіді для вказівки типу контенту.
+            // У цьому випадку, це зображення png.
+            Response.Headers.Add("Content-Type", "image/png");
+
+            // Поверніть фотографію як байти.
+            return File(photoBytes, "image/png");
+        }
+
+        private byte[] GetPhotoBytes(string photoId)
+        {
+            // Спочатку складіть повний шлях до файлу фотографії на сервері.
+            var filePath = Path.Combine("uploads", photoId);
+
+            // Перевірте, чи існує файл за вказаним шляхом.
+            if (System.IO.File.Exists(filePath))
+            {
+                // Якщо файл існує, прочитайте його байти.
+                return System.IO.File.ReadAllBytes(filePath);
+            }
+
+            // Якщо файл не існує, поверніть null або порожній масив, якщо потрібно.
+            return null;
         }
 
         private async Task<string> ComputeSHA256Hash(string password)

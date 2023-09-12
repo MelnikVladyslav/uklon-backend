@@ -23,17 +23,20 @@ namespace uklon_backend.Controllers
         private readonly IConfiguration _configuration;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
+        private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly UklonDbContext _context;
 
         public LoginController(IConfiguration configuration,
                               UserManager<User> userManager,
                               SignInManager<User> signInManager,
-                              UklonDbContext context)
+                              UklonDbContext context,
+                              IWebHostEnvironment hostingEnvironment)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             _configuration = configuration;
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         [HttpPost("login-phone")]
@@ -256,6 +259,110 @@ namespace uklon_backend.Controllers
             }
         }
 
+        [HttpPut("register-part")]
+        public async Task<IActionResult> RegisterPart(UserDTO user)
+        {
+            User foundUser;
+            string normEmail = userManager.NormalizeEmail(user.Email);
+
+            foundUser = await userManager.FindByEmailAsync(normEmail);
+            if (foundUser != null)
+            {
+                try
+                {
+                    var existingModel = await _context.Users.FindAsync(foundUser.Id);
+
+                    if (existingModel == null)
+                        return NotFound();
+
+                    existingModel.RoleId = "Partner";
+
+                    await _context.SaveChangesAsync();
+
+                    return Ok(existingModel);
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, $"Помилка при оновленні даних: {ex.Message}");
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPut("change-password")]
+        public async Task<IActionResult> ChangePass(string userId, string password)
+        {
+            User user = await userManager.FindByIdAsync(userId);
+
+            try
+            {
+                // Пошук моделі за ідентифікатором
+                var existingModel = await _context.Users.FindAsync(userId);
+
+                if (existingModel == null)
+                    return NotFound();
+
+                // Оновлення полів моделі
+                existingModel.PasswordHash = await ComputeSHA256Hash(password);
+
+                // Зберегти зміни
+                await _context.SaveChangesAsync();
+
+                return Ok(existingModel);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Помилка при оновленні даних: {ex.Message}");
+            }
+        }
+
+        [HttpPost("upload-photo")]
+        public async Task<IActionResult> UploadPhotoAsync(IFormFile imageFile, string userId)
+        {
+            if (imageFile == null || imageFile.Length == 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+
+            try
+            {
+                // Генерувати випадкове ім'я для файлу
+                var fileName = "photo" + Path.GetExtension(imageFile.FileName);
+
+                // Шлях для збереження файлу на сервері
+                var filePath = Path.Combine("uploads", fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await imageFile.CopyToAsync(stream);
+                }
+
+                // Ви можете зберігати шлях до файлу в базі даних або повертати його як відповідь
+                string imageUrl = "/uploads/" + fileName;
+
+                // Пошук моделі за ідентифікатором
+                var existingModel = await _context.Users.FindAsync(userId);
+
+                if (existingModel == null)
+                    return NotFound();
+
+                // Оновлення полів моделі
+                existingModel.Url = imageUrl;
+
+                // Зберегти зміни
+                await _context.SaveChangesAsync();
+
+                return Ok(existingModel);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { error = ex.Message });
+            }
+        }
+
         private async Task<string> ComputeSHA256Hash(string password)
         {
 
@@ -301,5 +408,6 @@ namespace uklon_backend.Controllers
 
             return tokenString;
         }
+
     }
 }

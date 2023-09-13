@@ -3,6 +3,7 @@ using System;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(UklonDbContext))]
-    partial class UklonDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230911052436_AddSelAdres")]
+    partial class AddSelAdres
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,13 +128,7 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("SelAdresses");
                 });
@@ -440,31 +436,31 @@ namespace Data.Migrations
                         new
                         {
                             Id = "Full",
-                            ConcurrencyStamp = "27cce6b8-8c55-490c-90c8-6a9e7c022cbe",
+                            ConcurrencyStamp = "fa3035ed-f3d7-4c7f-9ec0-cd2e02e7cb47",
                             Name = "Administrator"
                         },
                         new
                         {
                             Id = "Client",
-                            ConcurrencyStamp = "5768a46d-43a6-44ca-9838-a01712dc15d2",
+                            ConcurrencyStamp = "6fbc7ba0-7653-4224-b186-e1047751af63",
                             Name = "Client"
                         },
                         new
                         {
                             Id = "Partner",
-                            ConcurrencyStamp = "35bebc4d-fc55-4d6e-930e-460c633acba5",
+                            ConcurrencyStamp = "584a3e0d-ee4c-4483-8097-4e7178127b8c",
                             Name = "Bisness-partner"
                         },
                         new
                         {
                             Id = "Driver",
-                            ConcurrencyStamp = "874d82c0-cc84-4ddd-a6fc-afb967d88f58",
+                            ConcurrencyStamp = "6b9fefe8-f50a-494e-b001-7ee178603636",
                             Name = "Driver"
                         },
                         new
                         {
                             Id = "Corporation",
-                            ConcurrencyStamp = "9bc9fc87-59d0-40c5-ad6d-340b3f78ae37",
+                            ConcurrencyStamp = "bc558a40-3f96-4fa5-bd82-984b3e813a95",
                             Name = "Corporation"
                         });
                 });
@@ -513,17 +509,6 @@ namespace Data.Migrations
                 {
                     b.HasOne("BissnesLogic.Entites.User", "User")
                         .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("BissnesLogic.Entites.SelAdress", b =>
-                {
-                    b.HasOne("BissnesLogic.Entites.User", "User")
-                        .WithMany("FavoritePlace")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -626,8 +611,6 @@ namespace Data.Migrations
             modelBuilder.Entity("BissnesLogic.Entites.User", b =>
                 {
                     b.Navigation("Cards");
-
-                    b.Navigation("FavoritePlace");
 
                     b.Navigation("Orders");
                 });

@@ -20,11 +20,23 @@ namespace uklon_backend.Controllers
         }
 
         [HttpPost("create-order")]
-        public async Task<IActionResult> CreateOrder(Order order)
+        public async Task<IActionResult> CreateOrder(OrderDTO order)
         {
+            Order newOrder = new Order()
+            {
+                Date = order.Date,
+                StartPoint = order.StartPoint,
+                EndPoint = order.EndPoint,
+                TotalPrice = order.TotalPrice,
+                Rating = order.Rating,
+                Type = order.Type,
+                Transports = order.Transports,
+                UserId = order.UserId,
+            };
+
             try
             {
-                _context.Orders.Add(order);
+                _context.Orders.Add(newOrder);
                 await _context.SaveChangesAsync();
 
                 return Ok(order);

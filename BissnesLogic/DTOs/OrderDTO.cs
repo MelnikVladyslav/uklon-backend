@@ -16,6 +16,5 @@ namespace BissnesLogic.DTOs
         public string EndPoint { get; set; }
         public int Rating { get; set; }
         public string Type { get; set; }
-        public IEnumerable<Transport> Transports { get; set; } = new HashSet<Transport>();
     }
 }

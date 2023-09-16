@@ -30,7 +30,6 @@ namespace uklon_backend.Controllers
                 TotalPrice = order.TotalPrice,
                 Rating = order.Rating,
                 Type = order.Type,
-                Transports = order.Transports,
                 UserId = order.UserId,
             };
 

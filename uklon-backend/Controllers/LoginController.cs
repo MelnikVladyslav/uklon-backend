@@ -293,20 +293,20 @@ namespace uklon_backend.Controllers
         }
 
         [HttpPut("change-password")]
-        public async Task<IActionResult> ChangePass(string userId, string password)
+        public async Task<IActionResult> ChangePass(ChangeDTO change)
         {
-            User user = await userManager.FindByIdAsync(userId);
+            User user = await userManager.FindByIdAsync(change.userId);
 
             try
             {
                 // Пошук моделі за ідентифікатором
-                var existingModel = await _context.Users.FindAsync(userId);
+                var existingModel = await _context.Users.FindAsync(change.userId);
 
                 if (existingModel == null)
                     return NotFound();
 
                 // Оновлення полів моделі
-                existingModel.PasswordHash = await ComputeSHA256Hash(password);
+                existingModel.PasswordHash = await ComputeSHA256Hash(change.password);
 
                 // Зберегти зміни
                 await _context.SaveChangesAsync();
@@ -320,30 +320,30 @@ namespace uklon_backend.Controllers
         }
 
         [HttpPost("upload-photo")]
-        public async Task<IActionResult> UploadPhotoAsync(IFormFile imageFile, string userId)
+        public async Task<IActionResult> UploadPhotoAsync(UploadDTO upload)
         {
-            if (imageFile == null || imageFile.Length == 0)
+            if (upload.imageFile == null || upload.imageFile.Length == 0)
             {
                 return BadRequest("No file uploaded.");
             }
 
             try
             {
-                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.imageFile.FileName);
 
                 // Шлях для збереження файлу на сервері
                 var filePath = Path.Combine("uploads", fileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    await imageFile.CopyToAsync(stream);
+                    await upload.imageFile.CopyToAsync(stream);
                 }
 
                 // Ви можете зберігати шлях до файлу в базі даних або повертати його як відповідь
                 string imageUrl = "/uploads/" + fileName;
 
                 // Пошук моделі за ідентифікатором
-                var existingModel = await _context.Users.FindAsync(userId);
+                var existingModel = await _context.Users.FindAsync(upload.userId);
 
                 if (existingModel == null)
                     return NotFound();

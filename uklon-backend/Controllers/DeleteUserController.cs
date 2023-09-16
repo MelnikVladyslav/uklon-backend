@@ -40,9 +40,10 @@ namespace uklon_backend.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteUser(string userId)
+        public async Task<IActionResult> DeleteUser(UserDTO user)
         {
-            var delUser = await userManager.FindByIdAsync(userId);
+            var normEmail = userManager.NormalizeEmail(user.Email);
+            var delUser = await userManager.FindByEmailAsync(normEmail);
 
             if (delUser == null)
             {

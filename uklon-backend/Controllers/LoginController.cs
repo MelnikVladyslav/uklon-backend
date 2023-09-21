@@ -320,41 +320,29 @@ namespace uklon_backend.Controllers
         }
 
         [HttpPost("upload-photo")]
-        public async Task<IActionResult> UploadPhotoAsync(UploadDTO upload)
+        public async Task<IActionResult> UploadPhotoAsync(IFormFile imageFile)
         {
-            if (upload.imageFile == null || upload.imageFile.Length == 0)
+            if (imageFile == null || imageFile.Length == 0)
             {
                 return BadRequest("No file uploaded.");
             }
 
             try
             {
-                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(upload.imageFile.FileName);
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
 
                 // Шлях для збереження файлу на сервері
                 var filePath = Path.Combine("uploads", fileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    await upload.imageFile.CopyToAsync(stream);
+                    await imageFile.CopyToAsync(stream);
                 }
 
                 // Ви можете зберігати шлях до файлу в базі даних або повертати його як відповідь
                 string imageUrl = "/uploads/" + fileName;
 
-                // Пошук моделі за ідентифікатором
-                var existingModel = await _context.Users.FindAsync(upload.userId);
-
-                if (existingModel == null)
-                    return NotFound();
-
-                // Оновлення полів моделі
-                existingModel.Url = imageUrl;
-
-                // Зберегти зміни
-                await _context.SaveChangesAsync();
-
-                return Ok(existingModel);
+                return Ok(fileName);
             }
             catch (Exception ex)
             {

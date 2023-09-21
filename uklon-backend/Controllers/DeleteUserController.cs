@@ -39,11 +39,10 @@ namespace uklon_backend.Controllers
             _context = context;
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteUser(UserDTO user)
+        [HttpDelete("/{id}")]
+        public async Task<IActionResult> DeleteUser(string id)
         {
-            var normEmail = userManager.NormalizeEmail(user.Email);
-            var delUser = await userManager.FindByEmailAsync(normEmail);
+            var delUser = await userManager.FindByIdAsync(id);
 
             if (delUser == null)
             {
